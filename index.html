@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>Color Wheel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- iro.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      background: transparent;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #picker {
+      width: 280px;
+      height: 280px;
+    }
+
+    #hex {
+      margin-top: 16px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: #f6c98a;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: none;
+      background: #f6c98a;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 圓形調色盤 -->
+  <div id="picker"></div>
+
+  <!-- HEX 顯示 -->
+  <div id="hex">#F9C27B</div>
+
+  <!-- 複製 -->
+  <button onclick="copyHex()">複製色碼</button>
+
+  <script>
+    const colorPicker = new iro.ColorPicker("#picker", {
+      width: 280,
+      color: "#F9C27B",
+      layout: [
+        {
+          component: iro.ui.Wheel,
+          options: {
+            wheelLightness: false,
+            wheelAngle: 0
+          }
+        }
+      ]
+    });
+
+    const hexBox = document.getElementById("hex");
+
+    colorPicker.on("color:change", function(color) {
+      hexBox.textContent = color.hexString.toUpperCase();
+    });
+
+    function copyHex() {
+      navigator.clipboard.writeText(hexBox.textContent);
+    }
+  </script>
+
+</body>
+</html>
