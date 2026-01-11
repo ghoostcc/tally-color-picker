@@ -31,20 +31,7 @@
       background: #f6c98a;
       font-weight: 600;
       letter-spacing: 0.04em;
-    }
-
-    button {
-      margin-top: 10px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: none;
-      background: #f6c98a;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    button:active {
-      transform: scale(0.96);
+      user-select: text; /* 明確允許使用者自己選取 */
     }
   </style>
 </head>
@@ -53,11 +40,8 @@
   <!-- 圓形調色盤 -->
   <div id="picker"></div>
 
-  <!-- HEX 顯示 -->
+  <!-- HEX 顯示（純顯示，讓使用者自行複製） -->
   <div id="hex">#F9C27B</div>
-
-  <!-- 複製 -->
-  <button onclick="copyHex()">複製色碼</button>
 
   <script>
     const colorPicker = new iro.ColorPicker("#picker", {
@@ -79,11 +63,8 @@
     colorPicker.on("color:change", function(color) {
       hexBox.textContent = color.hexString.toUpperCase();
     });
-
-    function copyHex() {
-      navigator.clipboard.writeText(hexBox.textContent);
-    }
   </script>
 
 </body>
 </html>
+
